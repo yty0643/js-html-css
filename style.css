@@ -420,7 +420,6 @@ p {
 }
 
 .testimonial__speech-bubble p {
-  word-wrap: break-word;
   color: var(--color-light-grey);
 }
 
