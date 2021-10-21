@@ -2,9 +2,9 @@
 
 :root {
   /* Color */
-  --color-skyblue: rgba(47, 163, 209, 0.842);
-  --color-dark-blue: rgba(31, 101, 129, 0.842);
-  --color-light-blue: rgba(148, 171, 180, 0.842);
+  --color-skyblue: rgba(47, 163, 209);
+  --color-dark-blue: rgba(31, 101, 129);
+  --color-light-blue: rgba(148, 171, 180);
   --color-white: #ffffff;
   --color-light-white: #eeeeee;
   --color-dark-white: #bdbdbd;
@@ -95,12 +95,21 @@ p {
 
 /* Navbar */
 #navbar {
+  box-sizing: border-box;
+  width: 100%;
+  position: fixed;
   display: flex;
   justify-content: space-between;
-  background-color: var(--color-skyblue);
+  background-color: transparent;
   align-items: center;
   color: var(--color-white);
-  padding: 16px;
+  padding: 16px 20px;
+  transition: all var(--animation-duration) ease-in-out;
+}
+
+#navbar.navbar__dark {
+  background-color: var(--color-skyblue);
+  padding: 8px;
 }
 
 .navbar__menu {
@@ -138,6 +147,7 @@ p {
 #home {
   background: url("images/bg.png") center/cover no-repeat;
   padding: 40px;
+  padding-top: 100px;
   text-align: center;
 }
 
