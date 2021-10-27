@@ -10,7 +10,7 @@ document.addEventListener('scroll', ()=>{
     }
 });
 
-
+// Handle scrolling when tapping on the navbar menu
 const navbarMenu = document.querySelector('.navbar__menu');
 navbarMenu.addEventListener('click',(event)=>{
     
@@ -20,7 +20,25 @@ navbarMenu.addEventListener('click',(event)=>{
     if(link == null){
         return;
     }
-    console.log(event.target.dataset.link);
-    const scrollTo = document.querySelector(link);
-    scrollTo.scrollIntoView({behavior: 'smooth'});
+    scrollIntoView(link);
 });
+
+const contactBtn = document.querySelector('.home__contact');
+contactBtn.addEventListener('click',()=>{
+    scrollIntoView('#contact');
+});
+
+function scrollIntoView(selector){
+    const scrollTo = docuement.querySelector(selector);
+    scrollTo.scrollIntoView({behavior: 'smooth'});
+};
+
+document.addEventListener('scroll', ()=>{
+    const homeHeight = document.querySelector('#home').getBoundingClientRect().height;
+    const homeContent = document.querySelector('.home__container');
+    homeContent.style.opacity = 1 - scrollY/homeHeight;
+    
+    
+})
+
+
