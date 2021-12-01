@@ -64,6 +64,11 @@ const workCategory = document.querySelector('.work__categories');
 const projects = document.querySelectorAll('.project');
 const workProjects = document.querySelector('.work__projects');
 workCategory.addEventListener('click',(event)=>{
+    // Remove selection from the previous item and select the new one
+    const active = document.querySelector('.category__btn.selected');
+    active.classList.remove('selected');
+    event.target.nodeName ==='BUTTON' ? event.target.classList.add('selected') : event.target.parentNode.classList.add('selected');  
+
     const workLink = event.target.dataset.link || event.target.parentNode.dataset.link;
     if(workLink == null) return;
     workProjects.classList.add('anim-out');
@@ -78,3 +83,4 @@ workCategory.addEventListener('click',(event)=>{
         })
     },300);
 });
+
