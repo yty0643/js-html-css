@@ -52,8 +52,29 @@ arrowUpBtn.addEventListener('click',()=>{
 
 document.addEventListener('scroll', ()=>{
     if(scrollY > homeHeight/2){
-        arrowUpBtn.classList.add('visible');
+        arrowUpBtn.classList.add('invisible');
     }else{
-        arrowUpBtn.classList.remove('visible');
+        arrowUpBtn.classList.remove('invisible');
     }
+});
+
+// project category btn click
+
+const workCategory = document.querySelector('.work__categories');
+const projects = document.querySelectorAll('.project');
+const workProjects = document.querySelector('.work__projects');
+workCategory.addEventListener('click',(event)=>{
+    const workLink = event.target.dataset.link || event.target.parentNode.dataset.link;
+    if(workLink == null) return;
+    workProjects.classList.add('anim-out');
+    setTimeout(()=>{
+        workProjects.classList.remove('anim-out');
+        projects.forEach((project)=>{
+            if(workLink == 'all' || project.dataset.link == workLink){
+                project.classList.remove('invisible');
+            }else{
+                project.classList.add('invisible');
+            }
+        })
+    },300);
 });
