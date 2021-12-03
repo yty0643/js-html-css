@@ -121,12 +121,17 @@ p {
   font-size: var(--font-medium);
   font-weight: var(--weight-semi-bold);
 }
+
 .navbar__menu__item {
   padding: 8px 12px;
   margin: 0px 4px;
   cursor: pointer;
-  border-radius: var(--size-border-radius);
   border: 1px solid transparent;
+  border-radius: var(--size-border-radius);
+}
+
+.navbar__menu__item.active {
+  border: 1px solid var(--color-white);
 }
 
 .navbar__menu__item:hover {
@@ -175,6 +180,11 @@ p {
   border: 2px solid var(--color-white);
   border-radius: 4px;
   color: white;
+}
+
+.home__contact:hover {
+  background-color: var(--color-yellow);
+  color: black;
 }
 
 /* Section common */
@@ -424,6 +434,7 @@ p {
 
 .testimonial {
   display: flex;
+  justify-content: center;
   margin: 32px 0;
 }
 
@@ -485,8 +496,8 @@ p {
 /* arrow up */
 .arrow-up {
   position: fixed;
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 55px;
   right: 50px;
   bottom: 50px;
   font-size: 40px;

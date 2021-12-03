@@ -14,12 +14,6 @@ document.addEventListener('scroll', ()=>{
 const navbarMenu = document.querySelector('.navbar__menu');
 const contactBtn = document.querySelector('.home__contact');
 
-function scrollIntoView(selector){
-    const scrollTo = document.querySelector(selector);
-    scrollTo.scrollIntoView({behavior: 'smooth'});
-    
-};
-
 navbarMenu.addEventListener('click',(event)=>{
     const target = event.target;
     const link = target.dataset.link;
@@ -27,7 +21,6 @@ navbarMenu.addEventListener('click',(event)=>{
         return;
     }
     scrollIntoView(link);
-
     navbarMenu.classList.remove('open');
 });
 
@@ -92,3 +85,59 @@ workCategory.addEventListener('click',(event)=>{
     },300);
 });
 
+// 1.모든 섹션 요소들을 가지고 온다
+// 2.IntersectionObserver를 이용해서 섹션들을 관찰한다.
+// 3.보여지는 섹션에 해당하는 메뉴 아이템을 활성화 시킨다.
+const sectionIds=[
+    '#home',
+    '#about',
+    '#skills',
+    '#work',
+    '#testimonials',
+    '#contact'
+]
+const sections = sectionIds.map(id=>document.querySelector(id));
+const navItems = sectionIds.map(id=>document.querySelector(`.navbar__menu__item[data-link="${id}"]`));
+let selectedSection = navItems[0];
+let selectednavItemIdx = 0;
+
+const navbarActive = (target)=>{
+    selectedSection.classList.remove('active');
+    selectedSection = target;
+    selectedSection.classList.add('active');
+}
+function scrollIntoView(selector){
+    const scrollTo = document.querySelector(selector);
+    scrollTo.scrollIntoView({behavior: 'smooth'});
+    navbarActive(navItems[sectionIds.indexOf(selector)]);
+};
+
+const callback = (entries, observer)=>{
+    entries.forEach(entry=>{
+        if(!entry.isIntersecting && entry.intersectionRatio){
+            selectednavItemIdx = sectionIds.indexOf(`#${entry.target.id}`);
+            if(entry.boundingClientRect.y < 0){
+                selectednavItemIdx++;
+            }else{
+                selectednavItemIdx--;
+            }
+        }
+    })
+}
+const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.5
+}
+const observer = new IntersectionObserver(callback,options);
+const target = document.querySelectorAll('.section');
+target.forEach(temp=>observer.observe(temp));
+window.addEventListener('wheel',()=>{
+    if(window.scrollY <= 200){
+        selectednavItemIdx = 0;
+    }else if(Math.ceil(window.scrollY + window.innerHeight) >= document.body.clientHeight){
+        selectednavItemIdx = navItems.length -  1;
+    }
+    navbarActive(navItems[selectednavItemIdx]);
+});
+//isIntersecting
