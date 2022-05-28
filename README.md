@@ -1,2 +1,1 @@
-# portfolio
- c0r0lla's portfolio
+js, html, css 문법공부
