@@ -1,1 +1,1 @@
-js, html, css 문법공부
+html, css 문법공부
